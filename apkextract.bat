@@ -25,7 +25,7 @@ pip3 install protobuf pyqt5 pyqtwebengine requests websocket-client
 
 rem Extract .proto definitions from specified APK
 echo [42mGenerating protos, this will take a WHILE...[0m
-python ./pbtk/extractors/jar_extract.py "%~1" ./protos/ > nul 2>&1
+python -W ignore ./pbtk/extractors/jar_extract.py "%~1" protos
 echo.
 
 rem Finished

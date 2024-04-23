@@ -40,7 +40,7 @@ pip3 install protobuf pyqt5 pyqtwebengine requests websocket-client
 
 rem Extract .proto definitions from merged APK
 echo [42mGenerating protos, this will take a WHILE...[0m
-python ./pbtk/extractors/jar_extract.py ./merged.apk ./protos/ > nul 2>&1
+python -W ignore ./pbtk/extractors/jar_extract.py ./merged.apk protos
 echo.
 
 rem Finished

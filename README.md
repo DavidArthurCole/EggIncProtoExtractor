@@ -1,3 +1,6 @@
+# THIS IS WRITTEN FOR WINDOWS. ALL FILES ARE .BAT FILES
+(If someone wants to port this to Unix, feel free to open a PR).
+
 # Full-Extract (ADB)
 
 ## Pre-Requisites
