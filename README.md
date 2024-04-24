@@ -28,9 +28,6 @@
 
 # Common Notes
 
-The proto extraction will extract ***all*** protos from the provided/extracted APK, potentially including a lot of garbage that is not necessarily of interest.
-The file you'll most likely want will be generated in `protos/ei.proto`
-
 The following will be missing from `protos/ei.proto` post-extraction:
 
 ```
