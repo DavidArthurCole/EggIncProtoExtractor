@@ -20,7 +20,7 @@
 
 - Python 3.5 or later installed
 - `pip3` installed
-- **Single `arm64_*` APK in directory** (ex: `split_config.arm64_v8a.apk`)
+- **Single `arm*` APK in directory** (ex: `split_config.arm64_v8a.apk`)
 
 ## Running it
 

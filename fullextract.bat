@@ -25,18 +25,18 @@ for /f "tokens=1,*" %%a in ('adb shell pm path com.auxbrain.egginc') do (
 )
 
 rem Identify the APK with 'arm64' in the filename
-echo [42mIdentifying APK with 'arm64' architecture...[0m
+echo [42mIdentifying APK with 'arm' architecture...[0m
 set "target_apk="
 for %%f in (input_apks\*.apk) do (
     set "filename=%%~nxf"
-    if "!filename:arm64=!" neq "!filename!" (
+    if "!filename:arm=!" neq "!filename!" (
         set "target_apk=%%f"
-        echo Found APK with 'arm64' architecture: %%f
+        echo Found APK with 'arm' architecture: %%f
     )
 )
 
 if not defined target_apk (
-    echo [41mError: No APK with 'arm64' architecture found. Exiting...[0m
+    echo [41mError: No APK with 'arm' architecture found. Exiting...[0m
     goto :end
 )
 
