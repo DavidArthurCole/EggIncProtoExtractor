@@ -24,9 +24,21 @@ for /f "tokens=1,*" %%a in ('adb shell pm path com.auxbrain.egginc') do (
     )
 )
 
-rem Merge extracted APKs into a single package
-echo [42mCombining extracted APKs...[0m
-java -jar APKEditor.jar m -i input_apks -o merged.apk
+rem Identify the APK with 'arm64' in the filename
+echo [42mIdentifying APK with 'arm64' architecture...[0m
+set "target_apk="
+for %%f in (input_apks\*.apk) do (
+    set "filename=%%~nxf"
+    if "!filename:arm64=!" neq "!filename!" (
+        set "target_apk=%%f"
+        echo Found APK with 'arm64' architecture: %%f
+    )
+)
+
+if not defined target_apk (
+    echo [41mError: No APK with 'arm64' architecture found. Exiting...[0m
+    goto :end
+)
 
 rem Create or clear /protos/ directory
 echo [42mCreating and wiping /protos/ directory...[0m
@@ -38,9 +50,9 @@ rem Install pip dependencies
 echo [42mInstalling dependencies from PIP...[0m
 pip3 install protobuf pyqt5 pyqtwebengine requests websocket-client
 
-rem Extract .proto definitions from merged APK
+rem Extract .proto definitions from identified APK
 echo [42mGenerating protos, this will take a WHILE...[0m
-python -W ignore ./pbtk/extractors/jar_extract.py ./merged.apk protos
+python -W ignore ./pbtk/extractors/jar_extract.py "!target_apk!" protos
 echo.
 
 rem Finished
@@ -49,6 +61,7 @@ echo [42mProto files generated, killing ADB...[0m
 rem Shutdown ADB when done
 adb kill-server
 
+:end
 rem Pause to keep the terminal window open
 pause
 
