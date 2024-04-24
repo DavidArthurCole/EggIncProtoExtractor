@@ -1,6 +1,3 @@
-# THIS IS WRITTEN FOR WINDOWS. ALL FILES ARE .BAT FILES
-(If someone wants to port this to Unix, feel free to open a PR).
-
 # Full-Extract (ADB)
 
 ## Pre-Requisites
@@ -13,7 +10,7 @@
 ## Running it
 
 - Make sure you have an active ADB connection to a device with Egg, Inc. installed
-- Run `fullextract.bat` from CMD, or with a double click
+- Run `fullextract` from CMD, or with a double click
 
 ---
 

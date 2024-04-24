@@ -57,9 +57,20 @@ echo.
 
 rem Finished
 echo [42mProto files generated, killing ADB...[0m
+echo.
 
 rem Shutdown ADB when done
 adb kill-server
+
+rem Kill /inputs_apks/ directory
+echo [42mKilling /input_apks/ directory...[0m
+echo.
+rd /s /q input_apks 2>nul
+
+rem Killing APKS in base directory
+echo [42mKilling APKs in base directory...[0m
+echo.
+del /q *.apk 2>nul
 
 :end
 rem Pause to keep the terminal window open
