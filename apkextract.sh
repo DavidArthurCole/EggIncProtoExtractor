@@ -19,8 +19,12 @@ echo "Installing dependencies from PIP..."
 python3 -m venv .venv
 ./.venv/bin/pip install protobuf pyqt5 pyqtwebengine requests websocket-client
 
-echo "Generating protos, this will take a WHILE..."
+echo "Generating protos..."
 python3 -W ignore ./pbtk/extractors/jar_extract.py "$1" protos
 echo
 
 echo "Proto files generated..."
+
+echo "Cleaning up generated protos..."
+python3 -W ./ignore proto_cleanup.py
+echo

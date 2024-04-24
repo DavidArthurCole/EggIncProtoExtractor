@@ -22,6 +22,12 @@ python3 -m venv .venv
 ./.venv/bin/pip install protobuf pyqt5 pyqtwebengine requests websocket-client
 echo 
 
-echo "Generating protos"
+echo "Generating protos..."
 python3 -W ignore ./pbtk/extractors/jar_extract.py ./input_apks/*.apk protos
+echo
+
+echo "Proto files generated..."
+
+echo "Cleaning up generated protos..."
+python3 -W ignore ./proto_cleanup.py
 echo

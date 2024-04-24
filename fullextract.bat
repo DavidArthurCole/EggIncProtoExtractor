@@ -55,6 +55,11 @@ echo [42mGenerating protos, this will take a WHILE...[0m
 python -W ignore ./pbtk/extractors/jar_extract.py "!target_apk!" protos
 echo.
 
+rem Cleanup proto file with protocleanup.py
+echo [42mCleaning up proto files...[0m
+python -W ignore ./protocleanup.py protos
+echo.
+
 rem Finished
 echo [42mProto files generated, killing ADB...[0m
 echo.
