@@ -26,5 +26,5 @@ echo
 echo "Proto files generated..."
 
 echo "Cleaning up generated protos..."
-python3 -W ignore ./proto_cleanup.py
+python3 -W ignore ./protocleanup.py
 echo
