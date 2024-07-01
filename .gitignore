@@ -1,5 +1,6 @@
 /input_apks
 /protos
 *.apk
-__pycache__/
+/pbtk/extractors/__pycache__/
+/pbtk/utils/__pycache__/
 .venv
