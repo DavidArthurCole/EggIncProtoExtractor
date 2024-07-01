@@ -1,5 +1,5 @@
 /input_apks
 /protos
 *.apk
-__pycache__
+__pycache__/
 .venv
