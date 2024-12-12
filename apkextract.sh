@@ -10,21 +10,23 @@ if [ ! -f $1 ]; then
   exit 1
 fi
 
-echo "Creating and wiping /protos/ directory..."
-rm -rf protos
-mkdir protos
-echo
+# Generate timestamp for unique protos folder
+timestamp=$(date +"%Y-%m-%d_%H%M%S")
+protos_folder="protos_$timestamp"
+
+echo "Creating unique $protos_folder directory..."
+mkdir "$protos_folder"
 
 echo "Installing dependencies from PIP..."
 python3 -m venv .venv
 ./.venv/bin/pip install protobuf pyqt5 pyqtwebengine requests websocket-client
 
 echo "Generating protos..."
-python3 -W ignore ./pbtk/extractors/jar_extract.py "$1" protos
+python3 -W ignore ./pbtk/extractors/jar_extract.py "$1" "$protos_folder"
 echo
 
 echo "Proto files generated..."
 
-echo "Cleaning up generated protos..."
+echo "Cleaning up generated $protos_folder..."
 python3 -W ignore ./protocleanup.py
 echo

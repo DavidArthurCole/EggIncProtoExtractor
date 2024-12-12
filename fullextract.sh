@@ -11,9 +11,12 @@ APK=$(adb shell pm path com.auxbrain.egginc | grep "^package.*arm" | head -1 | c
 adb pull $APK input_apks
 echo
 
-echo "Creating and wiping protos directory..."
-rm -rf ./protos
-mkdir protos
+# Generate timestamp for unique protos folder
+timestamp=$(date +"%Y-%m-%d_%H%M%S")
+protos_folder="protos_$timestamp"
+
+echo "Creating unique $protos_folder directory..."
+mkdir "$protos_folder"
 echo
 
 echo "Installing dependencies from PIP..."
@@ -23,10 +26,10 @@ python3 -m venv .venv
 echo 
 
 echo "Generating protos..."
-python3 -W ignore ./pbtk/extractors/jar_extract.py ./input_apks/*.apk protos
+python3 -W ignore ./pbtk/extractors/jar_extract.py ./input_apks/*.apk "$protos_folder"
 echo
 
-echo "Proto files generated..."
+echo "Proto files generated in $protos_folder..."
 
 echo "Cleaning up generated protos..."
 python3 -W ignore ./proto_cleanup.py

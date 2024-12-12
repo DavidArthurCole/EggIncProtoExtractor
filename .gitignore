@@ -1,5 +1,5 @@
 /input_apks
-/protos
+/protos*
 *.apk
 /pbtk/extractors/__pycache__/
 /pbtk/utils/__pycache__/

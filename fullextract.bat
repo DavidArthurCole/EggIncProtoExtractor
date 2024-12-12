@@ -40,10 +40,13 @@ if not defined target_apk (
     goto :end
 )
 
-rem Create or clear /protos/ directory
-echo [42mCreating and wiping /protos/ directory...[0m
-rd /s /q protos 2>nul
-mkdir protos
+rem Generate timestamp for unique protos folder
+for /f "tokens=2 delims==." %%A in ('wmic os get localdatetime /value') do set timestamp=%%A
+set protos_folder=protos_!timestamp:~0,4!-!timestamp:~4,2!-!timestamp:~6,2!_!timestamp:~8,2!-!timestamp:~10,2!-!timestamp:~12,2!
+
+rem Create a new protos folder
+echo [42mCreating unique /%protos_folder%/ directory...[0m
+mkdir "%protos_folder%"
 echo.
 
 rem Install pip dependencies
@@ -52,16 +55,16 @@ pip3 install protobuf pyqt5 pyqtwebengine requests websocket-client
 
 rem Extract .proto definitions from identified APK
 echo [42mGenerating protos, this will take a WHILE...[0m
-python -W ignore ./pbtk/extractors/jar_extract.py "!target_apk!" protos
+python -W ignore ./pbtk/extractors/jar_extract.py "!target_apk!" "%protos_folder%"
 echo.
 
 rem Cleanup proto file with protocleanup.py
 echo [42mCleaning up proto files...[0m
-python -W ignore ./protocleanup.py protos
+python -W ignore ./protocleanup.py "%protos_folder%"
 echo.
 
 rem Finished
-echo [42mProto files generated, killing ADB...[0m
+echo [42mProto files generated in %protos_folder%, killing ADB...[0m
 echo.
 
 rem Shutdown ADB when done
@@ -72,7 +75,7 @@ echo [42mKilling /input_apks/ directory...[0m
 echo.
 rd /s /q input_apks 2>nul
 
-rem Killing APKS in base directory
+rem Killing APKs in base directory
 echo [42mKilling APKs in base directory...[0m
 echo.
 del /q *.apk 2>nul
