@@ -1,6 +1,10 @@
+import sys
+import os
+
 def cleanup():
-    MAIN_PROTO_PATH = 'protos/ei.proto'
-    COMMON_PROTO_PATH = 'protos/common.proto'
+    base = sys.argv[1] if len(sys.argv) > 1 else 'protos'
+    MAIN_PROTO_PATH = os.path.join(base, 'ei.proto')
+    COMMON_PROTO_PATH = os.path.join(base, 'common.proto')
     
     # Read content from common.proto excluding the first 3 lines (syntax, package)
     try:
