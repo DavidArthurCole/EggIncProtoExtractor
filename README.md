@@ -1,3 +1,7 @@
+## Read-Only
+This project has been merged into [EggIncognito](https://eggincognito.davidarthurcole.me/), as the [Protos Section](https://eggincognito.davidarthurcole.me/protos).
+This was part of a larger cleanup to centralize my tools. The scripts located within this repo still function :)
+
 # Full-Extract (ADB)
 
 ## Pre-Requisites
